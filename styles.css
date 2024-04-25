@@ -9,27 +9,24 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    /* Stacks children vertically */
     height: 100vh;
     text-align: center;
     overflow-x: hidden;
-}
-
-h1 {
-    font-size: 2em;
-    margin: 20px 0;
 }
 
 #periodic-table {
     display: grid;
     grid-template-columns: repeat(18, 50px);
     gap: 5px;
-    width: 100%;
-    /* Ensures the container's width is full but constrained by parent */
-    overflow-x: auto;
-    /* Allows horizontal scrolling when content overflows */
+    width: auto;
+    justify-content: center;
 }
 
+
+h1 {
+    font-size: 2em;
+    margin: 20px 0;
+}
 
 .element {
     width: 50px;
