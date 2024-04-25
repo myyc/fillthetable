@@ -1,0 +1,306 @@
+/* General body styling */
+body {
+    font-family: 'Noto Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* Stacks children vertically */
+    height: 100vh;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2em;
+    margin: 20px 0;
+}
+
+/* Styling the periodic table */
+#periodic-table {
+    display: grid;
+    grid-template-columns: repeat(18, 50px);
+    gap: 5px;
+}
+
+.element {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.element:hover {
+    border-color: #27AE60;
+}
+
+.element:focus {
+    outline: 2px solid #5B9BD5;
+    outline-offset: 2px;
+}
+
+/* Modal overlay styling */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    /* This will help position the autocomplete list absolutely within the container */
+    width: 300px;
+    /* Set a fixed width or adjust as necessary */
+}
+
+#element-name {
+    width: 100%;
+    /* Ensure input field fills the container */
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.autocomplete-items {
+    position: absolute;
+    top: 100%;
+    /* Position directly below the input field */
+    left: 0;
+    right: 0;
+    z-index: 10;
+    /* Ensure it lays over other content but below modal overlays if any */
+    background: white;
+    border: 1px solid #ccc;
+    border-top: none;
+    /* Seamless connection with the input field */
+    max-height: 150px;
+    /* Limit height and use scrolling if necessary */
+    overflow-y: auto;
+    /* Enable scrolling */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Optional: adds a shadow for better visibility */
+}
+
+.autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+    /* Divides individual items */
+}
+
+.autocomplete-items div:hover {
+    background-color: #f6f6f6;
+}
+
+.autocomplete-active {
+    background-color: DodgerBlue !important;
+    /* Highlight color */
+    color: #ffffff;
+}
+
+/* Styles for correctly guessed elements */
+.guessed {
+    font-weight: bold;
+    cursor: not-allowed;
+    color: #fff;
+    /* White text for contrast */
+}
+
+/* Specific colors for each category when guessed correctly */
+.actinide.guessed {
+    background-color: #ff8c00;
+}
+
+.alkali-metal.guessed {
+    background-color: #f00;
+}
+
+.alkaline-earth-metal.guessed {
+    background-color: #ff4500;
+}
+
+.diatomic-nonmetal.guessed {
+    background-color: #32cd32;
+}
+
+.lanthanide.guessed {
+    background-color: #ff69b4;
+}
+
+.metalloid.guessed {
+    background-color: #ffa500;
+}
+
+.noble-gas.guessed {
+    background-color: #00bfff;
+}
+
+.polyatomic-nonmetal.guessed {
+    background-color: #008000;
+}
+
+.post-transition-metal.guessed {
+    background-color: #daa520;
+}
+
+.transition-metal.guessed {
+    background-color: #c71585;
+}
+
+.unknown.guessed {
+    background-color: #808080;
+}
+
+.error-overlay {
+    position: fixed;
+    /* Overlay is positioned relative to the viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    /* Semi-transparent black background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    /* High z-index to ensure it covers other content */
+}
+
+.error-message {
+    font-size: 2em;
+    /* Large font size for visibility */
+    color: red;
+    /* Red text for error message */
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fff;
+    /* White background to highlight the text */
+}
+
+
+/* Default light mode styles already defined above */
+
+/* Dark mode styles based on user's system preferences */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #121212;
+        /* Very dark grey, almost black */
+        color: #ffffff;
+        /* White text for better readability */
+    }
+
+    .element {
+        background-color: #333;
+        /* Darker element background */
+        border: 1px solid #555;
+        /* Darker borders for elements */
+    }
+
+    #periodic-table .element:hover {
+        border-color: #88c0d0;
+        /* A lighter, vibrant color for hover */
+    }
+
+    #periodic-table .element:focus {
+        outline-color: #5B9BD5;
+        /* Ensuring focus is clearly visible */
+    }
+
+    .modal {
+        background-color: rgba(0, 0, 0, 0.8);
+        /* Darker modal background */
+    }
+
+    .autocomplete-items {
+        background: #222;
+        /* Darker autocomplete background */
+        border-color: #444;
+        /* Darker border */
+    }
+
+    .autocomplete-items div:hover {
+        background-color: #333;
+        /* Dark hover background for autocomplete items */
+    }
+
+    .guessed {
+        color: #fff;
+        /* White text for guessed elements */
+    }
+
+    .actinide.guessed {
+        background-color: #ffad42;
+    }
+
+    .alkali-metal.guessed {
+        background-color: #ff5555;
+    }
+
+    .alkaline-earth-metal.guessed {
+        background-color: #ff8866;
+    }
+
+    .diatomic-nonmetal.guessed {
+        background-color: #5df95d;
+    }
+
+    .lanthanide.guessed {
+        background-color: #ff85c8;
+    }
+
+    .metalloid.guessed {
+        background-color: #ffbf30;
+    }
+
+    .noble-gas.guessed {
+        background-color: #33daff;
+    }
+
+    .polyatomic-nonmetal.guessed {
+        background-color: #00b400;
+    }
+
+    .post-transition-metal.guessed {
+        background-color: #ffc832;
+    }
+
+    .transition-metal.guessed {
+        background-color: #e633a9;
+    }
+
+    .unknown.guessed {
+        background-color: #a0a0a0;
+    }
+
+    .error-overlay {
+        background-color: rgba(0, 0, 0, 0.75);
+        /* Semi-transparent overlay for dark mode */
+    }
+
+    .error-message {
+        color: #ff5555;
+        /* Brighter red for errors to ensure visibility */
+    }
+}

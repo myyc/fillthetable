@@ -1,0 +1,36 @@
+# IDE / Editor directories
+.idea/
+.vscode/
+*.swp
+*.swo
+*.sublime-workspace
+
+# Project environments (.env, .dev)
+.env
+.env.test
+.env*.local
+
+# Miscellaneous
+.DS_Store
+Thumbs.db
+*.thm
+
+# Built application files
+/dist
+/build
+
+# Temporary files
+tmp/
+temp/
+
+# Local development
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+pgdata/
+
+# Production config files
+/config.production.json
+
+# log files
+*.log
