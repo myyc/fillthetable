@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 elementDiv.dataset.symbol = element.symbol; // Store the symbol for displaying
                 elementDiv.dataset.category = element.category.replace(/ /g, '-').toLowerCase(); // Store the category for styling
                 elementDiv.dataset.phase = element.phase;
+                elementDiv.dataset.density = element.density;
                 elementDiv.dataset.melt = element.melt;
                 elementDiv.dataset.boil = element.boil;
                 elementDiv.dataset.appearance = element.appearance;
@@ -39,6 +40,10 @@ document.addEventListener('DOMContentLoaded', function () {
         <div><strong>Mass:</strong> ${element.atomic_mass}</div>
         <div><strong>Phase:</strong> ${element.phase}</div>
     `;
+
+                if (element.density !== null) {
+                    tooltipDiv.innerHTML += `<div><strong>Density:</strong> ${element.density} g/cm³</div>`;
+                }
 
                 if (element.melt !== null) {
                     tooltipDiv.innerHTML += `<div><strong>Melt:</strong> ${element.melt} K</div>`;
