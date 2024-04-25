@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Periodic Table Game</title>
+    <title>Fill the table!</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -14,14 +14,15 @@
 
     <div id="element-modal" class="modal">
         <div class="input-container">
-            <input type="text" id="element-name" name="element-name" autocomplete="off" placeholder="Enter element symbol" required>
+            <input type="text" id="element-name" name="element-name" autocomplete="off"
+                placeholder="Enter element symbol" required>
             <div id="autocomplete-list" class="autocomplete-items"></div> <!-- Autocomplete suggestions container -->
         </div>
     </div>
-    
+
     <div id="error-overlay" class="error-overlay" style="display:none;">
         <div class="error-message">INCORRECT!</div>
-    </div>    
+    </div>
 
     <script src="script.js"></script>
 </body>

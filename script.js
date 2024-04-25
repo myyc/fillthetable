@@ -51,11 +51,61 @@ document.addEventListener('DOMContentLoaded', function () {
         updateAutocomplete(this.value);
     });
 
+    // Add event listener to the container that holds the autocomplete items
+    autocompleteList.addEventListener('click', function (event) {
+        const target = event.target;
+        if (target.className === 'autocomplete-item') {
+            const element = target.textContent;
+            elementNameInput.value = element; // Set the input field to the text of the clicked item
+            autocompleteList.innerHTML = ''; // Clear the autocomplete list
+            autocompleteList.style.display = 'none'; // Hide the autocomplete list
+
+            processGuess(element); // Call the function to process the guess with the clicked item's text
+        }
+    });
+
     function updateAutocomplete(input) {
-        const suggestions = elementsArray.filter(name => name.startsWith(input.toLowerCase()) && input.trim() !== '').slice(0, 5);
-        // Code to display suggestions goes here
-        console.log(suggestions); // Placeholder to show suggestions in console
+        autocompleteList.innerHTML = ''; // Clear existing entries
+        if (input.trim() === '') {
+            autocompleteList.style.display = 'none'; // Hide the list if input is empty
+            return;
+        }
+
+        const filteredSuggestions = elementsArray.filter(name => name.toLowerCase().startsWith(input.toLowerCase())).slice(0, 5);
+        if (filteredSuggestions.length > 0) {
+            filteredSuggestions.forEach(function (element) {
+                const div = document.createElement('div');
+                div.textContent = element;
+                div.classList.add('autocomplete-item');
+                autocompleteList.appendChild(div);
+            });
+            autocompleteList.style.display = 'block';
+        } else {
+            autocompleteList.style.display = 'none';
+        }
     }
+
+    function processGuess(guessedName) {
+        const isCorrect = guessedName === currentElement.dataset.name;
+
+        const autocompleteList = document.getElementById('autocomplete-list');
+
+        // Clear autocomplete suggestions
+        autocompleteList.innerHTML = '';
+        autocompleteList.style.display = 'none'; // Hide the autocomplete list
+
+
+        if (isCorrect) {
+            currentElement.classList.add('guessed', currentElement.dataset.category);
+            currentElement.textContent = currentElement.dataset.symbol;
+            modal.style.display = 'none';
+            elementNameInput.value = '';
+            currentElement.focus(); // Refocus on the guessed element
+        } else {
+            displayError();
+        }
+    }
+
 
 
     document.addEventListener('keydown', function (event) {
@@ -137,27 +187,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Find the next element that matches the target X and the new target Y
         return elements.findIndex(el => parseInt(el.dataset.xpos) === currentX && parseInt(el.dataset.ypos) === targetY);
-    }
-
-    function processGuess(guessedName) {
-        const isCorrect = guessedName === currentElement.dataset.name;
-
-        const autocompleteList = document.getElementById('autocomplete-list');
-
-        // Clear autocomplete suggestions
-        autocompleteList.innerHTML = '';
-        autocompleteList.style.display = 'none'; // Hide the autocomplete list
-
-
-        if (isCorrect) {
-            currentElement.classList.add('guessed', currentElement.dataset.category);
-            currentElement.textContent = currentElement.dataset.symbol;
-            modal.style.display = 'none';
-            elementNameInput.value = '';
-            currentElement.focus(); // Refocus on the guessed element
-        } else {
-            displayError();
-        }
     }
 
     function displayError() {
