@@ -38,9 +38,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 tooltipDiv.innerHTML = `
         <div><strong>Mass:</strong> ${element.atomic_mass}</div>
         <div><strong>Phase:</strong> ${element.phase}</div>
-        <div><strong>Melt:</strong> ${element.melt} K</div>
-        <div><strong>Boil:</strong> ${element.boil} K</div>
     `;
+
+                if (element.melt !== null) {
+                    tooltipDiv.innerHTML += `<div><strong>Melt:</strong> ${element.melt} K</div>`;
+                }
+
+                if (element.boil !== null) {
+                    tooltipDiv.innerHTML += `<div><strong>Boil:</strong> ${element.boil} K</div>`;
+                }
+
                 if (element.appearance !== null) {
                     tooltipDiv.innerHTML += `<div><strong>Appearance:</strong> ${element.appearance}</div>`;
                 }
