@@ -94,8 +94,13 @@ document.addEventListener('DOMContentLoaded', function () {
         autocompleteList.innerHTML = '';
         autocompleteList.style.display = 'none'; // Hide the autocomplete list
 
-
         if (isCorrect) {
+            // Remove the guessed element from the autocomplete list
+            const index = elementsArray.indexOf(currentElement.dataset.name.toLowerCase());
+            if (index > -1) {
+                elementsArray.splice(index, 1); // Remove the element from the array
+            }
+
             currentElement.classList.add('guessed', currentElement.dataset.category);
             currentElement.textContent = currentElement.dataset.symbol;
             modal.style.display = 'none';
