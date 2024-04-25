@@ -26,12 +26,33 @@ document.addEventListener('DOMContentLoaded', function () {
                 elementDiv.dataset.name = element.name.toLowerCase(); // Store the name for case insensitive comparison
                 elementDiv.dataset.symbol = element.symbol; // Store the symbol for displaying
                 elementDiv.dataset.category = element.category.replace(/ /g, '-').toLowerCase(); // Store the category for styling
+                elementDiv.dataset.phase = element.phase;
+                elementDiv.dataset.melt = element.melt;
+                elementDiv.dataset.boil = element.boil;
+                elementDiv.dataset.appearance = element.appearance;
+
+                // Create a span for the tooltip
+                const tooltipDiv = document.createElement('div');
+                tooltipDiv.classList.add('tooltip');
+
+                tooltipDiv.innerHTML = `
+        <div><strong>Mass:</strong> ${element.atomic_mass}</div>
+        <div><strong>Phase:</strong> ${element.phase}</div>
+        <div><strong>Melt:</strong> ${element.melt} K</div>
+        <div><strong>Boil:</strong> ${element.boil} K</div>
+    `;
+                if (element.appearance !== null) {
+                    tooltipDiv.innerHTML += `<div><strong>Appearance:</strong> ${element.appearance}</div>`;
+                }
+
                 elementDiv.setAttribute('tabindex', '0');
 
                 elementDiv.textContent = element.number; // Display atomic number
                 elementDiv.style.gridRowStart = element.ypos;
                 elementDiv.style.gridColumnStart = element.xpos;
                 elementsArray.push(element.name.toLowerCase()); // Add element name to autocompletion array
+
+                elementDiv.appendChild(tooltipDiv);
 
                 // Attach click event to each element box
                 elementDiv.addEventListener('click', function () {
@@ -110,8 +131,6 @@ document.addEventListener('DOMContentLoaded', function () {
             displayError();
         }
     }
-
-
 
     document.addEventListener('keydown', function (event) {
         const activeElement = document.activeElement;
